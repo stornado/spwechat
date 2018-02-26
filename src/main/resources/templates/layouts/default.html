@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta id="Viewport" name="viewport"
+          content="width-device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no, shink-to-fit=no"/>
+    <title>咪咕爱唱接口测试</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}"
+          href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <style>
+        body {
+            padding-top: 5rem;
+        }
+    </style>
+</head>
+<body>
+
+<main role="main" class="container" layout:fragment="main-container">
+</main>
+
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"
+        src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+<script th:src="@{/webjars/popper.js/1.13.0/dist/popper.min.js}"
+        src="/webjars/popper.js/1.13.0/dist/popper.min.js"></script>
+<script th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"
+        src="/webjars/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script layout:fragment="footer-script"></script>
+</body>
+</html>

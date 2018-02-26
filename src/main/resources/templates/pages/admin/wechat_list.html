@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<div class="container" layout:fragment="main-container">
+    <ul>
+        <li th:each="wechat: ${wechats}">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${wechat.id}"></h5>
+                    <p class="card-text" th:text="${wechat.appId}"></p>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <div class="card">
+        <form th:action="@{/admin/wechat/}" action="/admin/wechat/" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="app-id">AppId</label>
+                <input type="text" id="app-id" name="appid"/>
+            </div>
+            <div class="form-group">
+                <label for="app-secret">AppSecret</label>
+                <input type="text" id="app-secret" name="appsecret"/>
+            </div>
+            <div class="form-group">
+                <label for="token">Token</label>
+                <input type="text" id="token" name="token"/>
+            </div>
+            <div class="form-group">
+                <label for="encoding-aes-key">EncodingAesKey</label>
+                <input type="text" id="encoding-aes-key" name="encodingaeskey"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block" type="submit">发送请求</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
