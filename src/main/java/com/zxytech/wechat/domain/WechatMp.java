@@ -32,6 +32,13 @@ public class WechatMp {
         this.appSecret = appSecret;
     }
 
+    public WechatMp(String appId, String appSecret, String token, String encodingAesKey) {
+        this.appId = appId;
+        this.appSecret = appSecret;
+        this.token = token;
+        this.encodingAesKey = encodingAesKey;
+    }
+
     public String getId() {
         return id;
     }

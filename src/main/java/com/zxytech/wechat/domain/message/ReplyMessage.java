@@ -3,40 +3,71 @@ package com.zxytech.wechat.domain.message;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.List;
 
 /**
  * @author xwxia
  * @date 2018/2/26 10:46
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "xml")
 @Document(collection = "reply_message")
 public class ReplyMessage extends MessageBase {
 
+    @XmlJavaTypeAdapter(XmlCDataAdapter.StringFieldAdapter.class)
+    @XmlElement(name = "Content")
     private String content;
 
     /**
      * 图片、语音、视频消息媒体id，可以调用多媒体文件下载接口拉取数据。
      */
+    @XmlJavaTypeAdapter(XmlCDataAdapter.StringFieldAdapter.class)
+    @XmlElement(name = "MediaId")
     @Field("media_id")
     private String mediaId;
+
+    @XmlJavaTypeAdapter(XmlCDataAdapter.StringFieldAdapter.class)
+    @XmlElement(name = "Title")
     private String title;
+
+    @XmlJavaTypeAdapter(XmlCDataAdapter.StringFieldAdapter.class)
+    @XmlElement(name = "Description")
     private String description;
 
+    @XmlJavaTypeAdapter(XmlCDataAdapter.StringFieldAdapter.class)
+    @XmlElement(name = "MusicURL")
     @Field("music_url")
     private String musicUrl;
+
+    @XmlJavaTypeAdapter(XmlCDataAdapter.StringFieldAdapter.class)
+    @XmlElement(name = "HQMusicUrl")
     @Field("hq_music_url")
     private String hqMusicUrl;
+
     /**
      * 缩略图的媒体id，通过素材管理中的接口上传多媒体文件，得到的id
      */
+    @XmlJavaTypeAdapter(XmlCDataAdapter.StringFieldAdapter.class)
+    @XmlElement(name = "ThumbMediaId")
     @Field("thumb_id")
     private String thumbMediaId;
 
+    @XmlElement(name = "ArticleCount")
     @Field("article_count")
     private Byte articleCount;
+
+    @XmlElement(name = "item")
     private List<NewsArticle> articles;
+
+    @XmlJavaTypeAdapter(XmlCDataAdapter.StringFieldAdapter.class)
+    @XmlElement(name = "PicUrl")
     @Field("pic_url")
     private String pictureUrl;
+
+    @XmlJavaTypeAdapter(XmlCDataAdapter.StringFieldAdapter.class)
+    @XmlElement(name = "Url")
     private String url;
 
     public ReplyMessage() {
@@ -50,9 +81,10 @@ public class ReplyMessage extends MessageBase {
      * @param createTime   消息创建时间 （整型）
      */
     public ReplyMessage(String toUserName, String fromUserName, Long createTime) {
+        super(toUserName, fromUserName, createTime);
     }
 
-
+    @XmlTransient
     public String getContent() {
         return content;
     }
@@ -61,6 +93,7 @@ public class ReplyMessage extends MessageBase {
         this.content = content;
     }
 
+    @XmlTransient
     public String getMediaId() {
         return mediaId;
     }
@@ -69,6 +102,7 @@ public class ReplyMessage extends MessageBase {
         this.mediaId = mediaId;
     }
 
+    @XmlTransient
     public String getTitle() {
         return title;
     }
@@ -77,6 +111,7 @@ public class ReplyMessage extends MessageBase {
         this.title = title;
     }
 
+    @XmlTransient
     public String getDescription() {
         return description;
     }
@@ -85,6 +120,7 @@ public class ReplyMessage extends MessageBase {
         this.description = description;
     }
 
+    @XmlTransient
     public String getMusicUrl() {
         return musicUrl;
     }
@@ -93,6 +129,7 @@ public class ReplyMessage extends MessageBase {
         this.musicUrl = musicUrl;
     }
 
+    @XmlTransient
     public String getHqMusicUrl() {
         return hqMusicUrl;
     }
@@ -101,6 +138,7 @@ public class ReplyMessage extends MessageBase {
         this.hqMusicUrl = hqMusicUrl;
     }
 
+    @XmlTransient
     public String getThumbMediaId() {
         return thumbMediaId;
     }
@@ -109,6 +147,7 @@ public class ReplyMessage extends MessageBase {
         this.thumbMediaId = thumbMediaId;
     }
 
+    @XmlTransient
     public Byte getArticleCount() {
         return articleCount;
     }
@@ -117,6 +156,7 @@ public class ReplyMessage extends MessageBase {
         this.articleCount = articleCount;
     }
 
+    @XmlTransient
     public List<NewsArticle> getArticles() {
         return articles;
     }
@@ -125,6 +165,7 @@ public class ReplyMessage extends MessageBase {
         this.articles = articles;
     }
 
+    @XmlTransient
     public String getPictureUrl() {
         return pictureUrl;
     }
@@ -133,6 +174,7 @@ public class ReplyMessage extends MessageBase {
         this.pictureUrl = pictureUrl;
     }
 
+    @XmlTransient
     public String getUrl() {
         return url;
     }
@@ -154,6 +196,14 @@ public class ReplyMessage extends MessageBase {
 
     public static class MessageBuilder {
         private ReplyMessage message;
+
+        /**
+         * @param fromUserName 接收方帐号（收到的OpenID）
+         * @param createTime   消息创建时间 （整型）
+         */
+        public MessageBuilder(String fromUserName, Long createTime) {
+            this(null, fromUserName, createTime);
+        }
 
         /**
          * @param toUserName   接收方帐号（收到的OpenID）
@@ -247,10 +297,10 @@ public class ReplyMessage extends MessageBase {
             this.message.setArticleCount((byte) articles.size());
             this.message.setArticles(articles);
             // 多条图文消息信息，默认第一个item为大图,注意，如果图文数超过8，则将会无响应
-            this.message.setTitle(articles.get(0).getTitle());
-            this.message.setDescription(articles.get(0).getDescription());
-            this.message.setPictureUrl(articles.get(0).getPictureUrl());
-            this.message.setUrl(articles.get(0).getUrl());
+//            this.message.setTitle(articles.get(0).getTitle());
+//            this.message.setDescription(articles.get(0).getDescription());
+//            this.message.setPictureUrl(articles.get(0).getPictureUrl());
+//            this.message.setUrl(articles.get(0).getUrl());
             return this.message;
         }
     }

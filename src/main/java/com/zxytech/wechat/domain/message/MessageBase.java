@@ -3,20 +3,40 @@ package com.zxytech.wechat.domain.message;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.Serializable;
+
 /**
  * @author xwxia
  * @date 2018/2/26 10:19
  */
-public abstract class MessageBase {
+@XmlAccessorType(XmlAccessType.FIELD)
+public abstract class MessageBase implements Serializable {
+
+    @XmlTransient
     @Id
     protected String id;
 
+    @XmlJavaTypeAdapter(XmlCDataAdapter.StringFieldAdapter.class)
+    @XmlElement(name = "ToUserName")
     @Field("to")
     protected String toUserName;
+
+    @XmlJavaTypeAdapter(XmlCDataAdapter.StringFieldAdapter.class)
+    @XmlElement(name = "FromUserName")
     @Field("from")
     protected String fromUserName;
+
+    @XmlElement(name = "CreateTime")
     @Field("createAt")
     protected Long createTime;
+
+    @XmlJavaTypeAdapter(XmlCDataAdapter.MessageTypeEnumAdapter.class)
+    @XmlElement(name = "MsgType")
     @Field("msg_type")
     protected MessageTypeEnum messageType;
 
@@ -36,6 +56,7 @@ public abstract class MessageBase {
         this.messageType = messageType;
     }
 
+    @XmlTransient
     public String getId() {
         return id;
     }
@@ -44,6 +65,7 @@ public abstract class MessageBase {
         this.id = id;
     }
 
+    @XmlTransient
     public String getToUserName() {
         return toUserName;
     }
@@ -52,6 +74,7 @@ public abstract class MessageBase {
         this.toUserName = toUserName;
     }
 
+    @XmlTransient
     public String getFromUserName() {
         return fromUserName;
     }
@@ -60,6 +83,7 @@ public abstract class MessageBase {
         this.fromUserName = fromUserName;
     }
 
+    @XmlTransient
     public Long getCreateTime() {
         return createTime;
     }
@@ -68,6 +92,7 @@ public abstract class MessageBase {
         this.createTime = createTime;
     }
 
+    @XmlTransient
     public MessageTypeEnum getMessageType() {
         return messageType;
     }

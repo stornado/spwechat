@@ -231,7 +231,7 @@ public class ReceivedMessage extends MessageBase {
 
     @Override
     public String toString() {
-        return "ReceivedMessage{}" +
+        return "ReceivedMessage{" +
                 "id='" + id + '\'' +
                 ", toUserName='" + toUserName + '\'' +
                 ", fromUserName='" + fromUserName + '\'' +

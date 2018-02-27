@@ -2,15 +2,32 @@ package com.zxytech.wechat.domain.message;
 
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 /**
  * @author xwxia
  * @date 2018/2/26 11:27
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "item")
 public class NewsArticle {
+
+    @XmlJavaTypeAdapter(XmlCDataAdapter.StringFieldAdapter.class)
+    @XmlElement(name = "Title")
     private String title;
+
+    @XmlJavaTypeAdapter(XmlCDataAdapter.StringFieldAdapter.class)
+    @XmlElement(name = "Description")
     private String description;
+
+    @XmlJavaTypeAdapter(XmlCDataAdapter.StringFieldAdapter.class)
+    @XmlElement(name = "PicUrl")
     @Field("pic_url")
     private String pictureUrl;
+
+    @XmlJavaTypeAdapter(XmlCDataAdapter.StringFieldAdapter.class)
+    @XmlElement(name = "Url")
     private String url;
 
     public NewsArticle() {
@@ -23,6 +40,7 @@ public class NewsArticle {
         this.url = url;
     }
 
+    @XmlTransient
     public String getTitle() {
         return title;
     }
@@ -31,6 +49,7 @@ public class NewsArticle {
         this.title = title;
     }
 
+    @XmlTransient
     public String getDescription() {
         return description;
     }
@@ -39,6 +58,7 @@ public class NewsArticle {
         this.description = description;
     }
 
+    @XmlTransient
     public String getPictureUrl() {
         return pictureUrl;
     }
@@ -47,6 +67,7 @@ public class NewsArticle {
         this.pictureUrl = pictureUrl;
     }
 
+    @XmlTransient
     public String getUrl() {
         return url;
     }

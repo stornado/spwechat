@@ -200,7 +200,7 @@ public class WXBizMsgCrypt {
     }
 
     // 随机生成16位字符串
-    String getRandomStr() {
+    public String getRandomStr() {
         String base = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
@@ -218,7 +218,7 @@ public class WXBizMsgCrypt {
      * @return 加密后base64编码的字符串
      * @throws AesException aes加密失败
      */
-    String encrypt(String randomStr, String text) throws AesException {
+    public String encrypt(String randomStr, String text) throws AesException {
         logger.debug("randomStr = [" + randomStr + "], text = [" + text + "]");
         ByteGroup byteCollector = new ByteGroup();
         byte[] randomStrBytes = randomStr.getBytes(CHARSET);
@@ -264,7 +264,7 @@ public class WXBizMsgCrypt {
      * @return 解密得到的明文
      * @throws AesException aes解密失败
      */
-    String decrypt(String text) throws AesException {
+    public String decrypt(String text) throws AesException {
         logger.debug("text = [" + text + "]");
         byte[] original;
         try {

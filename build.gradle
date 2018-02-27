@@ -45,8 +45,6 @@ targetCompatibility = 1.8
 dependencies {
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.10.RELEASE'
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure
-    compile group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '1.5.10.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '1.5.10.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
