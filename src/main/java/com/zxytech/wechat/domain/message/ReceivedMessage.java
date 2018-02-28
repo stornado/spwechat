@@ -237,6 +237,7 @@ public class ReceivedMessage extends MessageBase {
                 ", fromUserName='" + fromUserName + '\'' +
                 ", createTime=" + createTime +
                 ", messageType=" + messageType +
+                ", createAt=" + createAt +
                 '}';
     }
 
@@ -464,6 +465,16 @@ public class ReceivedMessage extends MessageBase {
             this.message.setMessageType(MessageTypeEnum.EVENT);
             this.message.setEventType(EventTypeEnum.VIEW);
             this.message.setEventKey(eventKey);
+            return this.message;
+        }
+
+        /**
+         * 进入会话
+         *
+         * @return
+         */
+        public ReceivedMessage prepareEnterEvent() {
+            this.message.setEventType(EventTypeEnum.ENTER);
             return this.message;
         }
     }

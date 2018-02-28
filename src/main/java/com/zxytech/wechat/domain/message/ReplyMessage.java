@@ -191,6 +191,7 @@ public class ReplyMessage extends MessageBase {
                 ", fromUserName='" + fromUserName + '\'' +
                 ", createTime=" + createTime +
                 ", messageType=" + messageType +
+                ", createAt=" + createAt +
                 '}';
     }
 
@@ -296,11 +297,6 @@ public class ReplyMessage extends MessageBase {
             this.message.setMessageType(MessageTypeEnum.NEWS);
             this.message.setArticleCount((byte) articles.size());
             this.message.setArticles(articles);
-            // 多条图文消息信息，默认第一个item为大图,注意，如果图文数超过8，则将会无响应
-//            this.message.setTitle(articles.get(0).getTitle());
-//            this.message.setDescription(articles.get(0).getDescription());
-//            this.message.setPictureUrl(articles.get(0).getPictureUrl());
-//            this.message.setUrl(articles.get(0).getUrl());
             return this.message;
         }
     }

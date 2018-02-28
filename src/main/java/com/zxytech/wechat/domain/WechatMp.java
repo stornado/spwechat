@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -11,7 +12,9 @@ import java.util.Objects;
  * @date 2018/2/26 15:23
  */
 @Document(collection = "wechat_mp")
-public class WechatMp {
+public class WechatMp implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     private String id;
 
@@ -99,7 +102,11 @@ public class WechatMp {
             return false;
         }
         WechatMp wechatMp = (WechatMp) o;
-        return Objects.equals(getAppId(), wechatMp.getAppId());
+        return Objects.equals(getId(), wechatMp.getId()) &&
+                Objects.equals(getAppId(), wechatMp.getAppId()) &&
+                Objects.equals(getAppSecret(), wechatMp.getAppSecret()) &&
+                Objects.equals(getToken(), wechatMp.getToken()) &&
+                Objects.equals(getEncodingAesKey(), wechatMp.getEncodingAesKey());
     }
 
     @Override

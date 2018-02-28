@@ -32,7 +32,11 @@ public enum EventTypeEnum {
 
     // 点击菜单跳转链接时间推送
     @XmlEnumValue(value = "VIEW")
-    VIEW("VIEW");
+    VIEW("VIEW"),
+
+    // (进入会话
+    @XmlEnumValue(value = "ENTER")
+    ENTER("ENTER");
 
 
     private String type;

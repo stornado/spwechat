@@ -124,8 +124,8 @@ public class WechatEchoController {
         String encrypt = wxBizMsgCrypt.encrypt(wxBizMsgCrypt.getRandomStr(), xml);
         Long createAt = Long.valueOf(String.valueOf(System.currentTimeMillis()));
         String randomStr = wxBizMsgCrypt.getRandomStr();
-        String mSignature = SHA1.getSHA1(wechatMp.getToken(), String.valueOf(createAt), nonce, encrypt);
-        EncryptMessage reply = new EncryptMessage(encrypt, mSignature, createAt, nonce);
+        String mSignature = SHA1.getSHA1(wechatMp.getToken(), String.valueOf(createAt), randomStr, encrypt);
+        EncryptMessage reply = new EncryptMessage(encrypt, mSignature, createAt, randomStr);
         logger.debug(reply.toString());
         return objectToXml(reply);
     }
@@ -142,7 +142,7 @@ public class WechatEchoController {
         JAXBContext jaxbContext = JAXBContext.newInstance(object.getClass());
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
         jaxbMarshaller.setProperty(Marshaller.JAXB_ENCODING, Charsets.UTF_8.name());
-        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        // jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         // 去掉生成xml的默认报文头
         // jaxbMarshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
         // 转换所有的适配字符，包括xml实体字符&lt;和&gt;，xml实体字符在好多处理xml

@@ -4,6 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.Serializable;
 
 /**
  * @author xwxia
@@ -11,7 +12,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "item")
-public class NewsArticle {
+public class NewsArticle implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @XmlJavaTypeAdapter(XmlCDataAdapter.StringFieldAdapter.class)
     @XmlElement(name = "Title")

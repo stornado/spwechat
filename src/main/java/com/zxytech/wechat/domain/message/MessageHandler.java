@@ -1,5 +1,7 @@
 package com.zxytech.wechat.domain.message;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -17,6 +19,7 @@ import java.io.StringReader;
  * @date 2018/2/26 16:13
  */
 final public class MessageHandler {
+    private static final Logger logger = LoggerFactory.getLogger(MessageHandler.class);
 
     /**
      * 根据明文XML生成对应消息
@@ -25,6 +28,8 @@ final public class MessageHandler {
      * @return
      */
     public static ReceivedMessage convertToMessage(String xmlContent) throws ParserConfigurationException, IOException, SAXException {
+        logger.debug(xmlContent);
+
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
         StringReader sr = new StringReader(xmlContent);
@@ -129,6 +134,8 @@ final public class MessageHandler {
                                 String mUrl = getFirstText(root, "EventKey");
                                 message = messageBuilder.prepareMenuViewEvent(mUrl);
                                 break;
+                            case ENTER:
+                                message = messageBuilder.prepareEnterEvent();
                             default:
                                 break;
 

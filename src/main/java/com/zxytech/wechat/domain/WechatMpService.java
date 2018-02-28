@@ -1,6 +1,7 @@
 package com.zxytech.wechat.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,6 +17,7 @@ public class WechatMpService {
         this.wechatMpRepository = wechatMpRepository;
     }
 
+    @Cacheable(value = "wechat:mp", key = "#wechatId", unless = "#result.appId eq null")
     public WechatMp get(String wechatId) {
         WechatMp wechatMp = wechatMpRepository.findOne(wechatId);
         if (null == wechatMp) {

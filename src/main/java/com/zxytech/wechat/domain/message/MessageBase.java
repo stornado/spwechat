@@ -16,6 +16,7 @@ import java.io.Serializable;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class MessageBase implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @XmlTransient
     @Id
@@ -32,7 +33,7 @@ public abstract class MessageBase implements Serializable {
     protected String fromUserName;
 
     @XmlElement(name = "CreateTime")
-    @Field("createAt")
+    @Field("create_time")
     protected Long createTime;
 
     @XmlJavaTypeAdapter(XmlCDataAdapter.MessageTypeEnumAdapter.class)
@@ -40,16 +41,22 @@ public abstract class MessageBase implements Serializable {
     @Field("msg_type")
     protected MessageTypeEnum messageType;
 
+    @XmlTransient
+    protected Long createAt;
+
     public MessageBase() {
+        this.createAt = System.currentTimeMillis();
     }
 
     public MessageBase(String toUserName, String fromUserName, Long createTime) {
+        this();
         this.toUserName = toUserName;
         this.fromUserName = fromUserName;
         this.createTime = createTime;
     }
 
     public MessageBase(String toUserName, String fromUserName, Long createTime, MessageTypeEnum messageType) {
+        this();
         this.toUserName = toUserName;
         this.fromUserName = fromUserName;
         this.createTime = createTime;
@@ -101,6 +108,15 @@ public abstract class MessageBase implements Serializable {
         this.messageType = messageType;
     }
 
+    @XmlTransient
+    public Long getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Long createAt) {
+        this.createAt = createAt;
+    }
+
     @Override
     public String toString() {
         return "MessageBase{" +
@@ -109,6 +125,7 @@ public abstract class MessageBase implements Serializable {
                 ", fromUserName='" + fromUserName + '\'' +
                 ", createTime=" + createTime +
                 ", messageType=" + messageType +
+                ", createAt=" + createAt +
                 '}';
     }
 }
