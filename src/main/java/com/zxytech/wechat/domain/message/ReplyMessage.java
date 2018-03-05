@@ -1,11 +1,14 @@
 package com.zxytech.wechat.domain.message;
 
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * @author xwxia
@@ -15,6 +18,19 @@ import java.util.List;
 @XmlRootElement(name = "xml")
 @Document(collection = "reply_message")
 public class ReplyMessage extends MessageBase {
+
+    /**
+     * 现支持回复文本、图片、图文、语音、视频、音乐
+     */
+    @Transient
+    public static final SortedSet<MessageTypeEnum> MESSAGE_TYPE_ENUMS = new TreeSet<MessageTypeEnum>() {{
+        add(MessageTypeEnum.TEXT);
+        add(MessageTypeEnum.IMAGE);
+        add(MessageTypeEnum.VOICE);
+        add(MessageTypeEnum.VIDEO);
+        add(MessageTypeEnum.MUSIC);
+        add(MessageTypeEnum.NEWS);
+    }};
 
     @XmlJavaTypeAdapter(XmlCDataAdapter.StringFieldAdapter.class)
     @XmlElement(name = "Content")
@@ -60,15 +76,6 @@ public class ReplyMessage extends MessageBase {
 
     @XmlElement(name = "item")
     private List<NewsArticle> articles;
-
-    @XmlJavaTypeAdapter(XmlCDataAdapter.StringFieldAdapter.class)
-    @XmlElement(name = "PicUrl")
-    @Field("pic_url")
-    private String pictureUrl;
-
-    @XmlJavaTypeAdapter(XmlCDataAdapter.StringFieldAdapter.class)
-    @XmlElement(name = "Url")
-    private String url;
 
     public ReplyMessage() {
     }
@@ -163,24 +170,6 @@ public class ReplyMessage extends MessageBase {
 
     public void setArticles(List<NewsArticle> articles) {
         this.articles = articles;
-    }
-
-    @XmlTransient
-    public String getPictureUrl() {
-        return pictureUrl;
-    }
-
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
-    }
-
-    @XmlTransient
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     @Override

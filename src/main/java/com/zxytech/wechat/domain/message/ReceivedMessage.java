@@ -3,12 +3,29 @@ package com.zxytech.wechat.domain.message;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 /**
  * @author xwxia
  * @date 2018/2/26 10:45
  */
 @Document(collection = "recv_message")
 public class ReceivedMessage extends MessageBase {
+
+    /**
+     * 允许接收普通消息和事件推送
+     */
+    public static final SortedSet<MessageTypeEnum> MESSAGE_TYPE_ENUMS = new TreeSet<MessageTypeEnum>() {{
+        add(MessageTypeEnum.TEXT);
+        add(MessageTypeEnum.IMAGE);
+        add(MessageTypeEnum.VOICE);
+        add(MessageTypeEnum.VIDEO);
+        add(MessageTypeEnum.SHORT_VIDEO);
+        add(MessageTypeEnum.LOCATION);
+        add(MessageTypeEnum.LINK);
+        add(MessageTypeEnum.EVENT);
+    }};
 
     private String content;
     @Field("msg_id")

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title th:text="#{site.name}">Dashboard Template for Bootstrap</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}"
+          href="/webjars/bootstrap/4.0.0/css/bootstrap.css"/>
+    <link rel="stylesheet" th:href="@{/css/navbar-top-fixed.css}" href="/static/css/navbar-top-fixed.css"/>
+    <style>
+        /* Show it is fixed to the top */
+        body {
+            min-height: 75rem;
+            padding-top: 4.5rem;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark justify-content-end" layout:fragment="header-nav">
+    <a class="navbar-brand" href="#" th:text="#{site.name}">Fixed navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+        </ul>
+        <span class="navbar-text" th:text="#{welcome}"> <b sec:authentication="name"></b>
+            Navbar text with an inline element
+        </span>
+        <form th:action="@{/logout}" action="/logout" method="post" class="form-inline mt-2 mt-md-0"
+              sec:authorize="isAuthenticated()">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" th:value="#{logout}">Log out</button>
+        </form>
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="language-dropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false" th:text="#{language}">
+                    Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="language-dropdown">
+                    <a class="dropdown-item" href="?lang=en_US">English</a>
+                    <a class="dropdown-item" href="?lang=zh_CN">中文</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Default</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid" layout:fragment="top-container">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar" layout:fragment="sidebar-nav">
+            <div class="sidebar-sticky">
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span th:text="#{wechat.message.board}">Saved reports</span>
+                </h6>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link text-right active" th:href="@{/admin/wechat/message/received}"
+                           href="/admin/wechat/message/received" th:text="#{wechat.message.received}">
+                            Dashboard <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-right" th:href="@{/admin/wechat/message/reply}"
+                           href="/admin/wechat/message/reply" th:text="#{wechat.message.reply}">
+                            Orders
+                        </a>
+                    </li>
+                </ul>
+
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span th:text="#{authorization.board}">Saved reports</span>
+                </h6>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link text-right" href="#" th:text="#{authorization.user}">
+                            <span data-feather="file-text"></span>
+                            Current month
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" layout:fragment="main-content">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                <h1 class="h2" layout:fragment="content-title">Dashboard</h1>
+                <div class="btn-toolbar mb-2 mb-md-0" layout:fragment="content-action">
+                </div>
+            </div>
+
+            <h2 layout:fragment="content-subtitle">Section title</h2>
+            <div class="table-responsive" layout:fragment="content">
+                <table class="table table-striped table-hover table-sm" layout:fragment="content-table">
+                    <thead layout:fragment="content-table-head">
+                    <tr>
+                        <th>#</th>
+                        <th>Header</th>
+                    </tr>
+                    </thead>
+                    <tbody layout:fragment="content-table-body">
+                    </tbody>
+                </table>
+            </div>
+
+            <nav aria-label="Page navigation example" layout:fragment="content-pagination">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+        </main>
+    </div>
+</div>
+
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}" src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+<script th:src="@{/webjars/popper.js/1.13.0/dist/popper.min.js}"
+        src="/webjars/popper.js/1.13.0/dist/popper.min.js"></script>
+<script th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"
+        src="/webjars/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

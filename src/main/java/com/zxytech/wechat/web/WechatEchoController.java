@@ -125,9 +125,9 @@ public class WechatEchoController {
         Long createAt = Long.valueOf(String.valueOf(System.currentTimeMillis()));
         String randomStr = wxBizMsgCrypt.getRandomStr();
         String mSignature = SHA1.getSHA1(wechatMp.getToken(), String.valueOf(createAt), randomStr, encrypt);
-        EncryptMessage reply = new EncryptMessage(encrypt, mSignature, createAt, randomStr);
-        logger.debug(reply.toString());
-        return objectToXml(reply);
+        EncryptMessage encryptReply = new EncryptMessage(encrypt, mSignature, createAt, randomStr);
+        logger.debug(encryptReply.toString());
+        return objectToXml(encryptReply);
     }
 
 
@@ -137,14 +137,18 @@ public class WechatEchoController {
         return NO_ECHO_CONTENT;
     }
 
+    /**
+     * http://blog.csdn.net/qustmeng/article/details/53706657
+     *
+     * @param object
+     * @return
+     * @throws JAXBException
+     */
     private static String objectToXml(Object object) throws JAXBException {
         StringWriter stringWriter = new StringWriter();
         JAXBContext jaxbContext = JAXBContext.newInstance(object.getClass());
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
         jaxbMarshaller.setProperty(Marshaller.JAXB_ENCODING, Charsets.UTF_8.name());
-        // jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        // 去掉生成xml的默认报文头
-        // jaxbMarshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
         // 转换所有的适配字符，包括xml实体字符&lt;和&gt;，xml实体字符在好多处理xml
         jaxbMarshaller.setProperty("com.sun.xml.internal.bind.marshaller.CharacterEscapeHandler",
                 (CharacterEscapeHandler) (ch, start, length, isAttVal, writer) -> writer.write(ch, start, length));

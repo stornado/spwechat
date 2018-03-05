@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/dashboard">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="#{wechat}">Wecht message management</title>
+</head>
+<body>
+
+<h1 layout:fragment="content-title" th:text="#{wechat.message.management}"></h1>
+
+<div layout:fragment="content-action">
+    <form action="#" class="form-inline">
+        <label for="app-id" class="src-only" th:text="#{wechat.message-header.app-id}">AppId</label>
+        <select name="appId" id="app-id" class="form-control mb-2 mr-sm-2">
+            <option value=""></option>
+            <option th:each="wechatMp : ${wechatMps}" th:value="${wechatMp.appId}" value=""
+                    th:text="${wechatMp.appId}" th:selected="${appId eq wechatMp.appId}"></option>
+        </select>
+        <label for="from-user-name" class="src-only"
+               th:text="#{wechat.message-header.user-name}">FromUserName</label>
+        <input name="fromUserName" id="from-user-name" type="text" class="form-control mb-2 mr-sm-2"
+               th:placeholder="#{wechat.message-header.user-name}" th:value="${fromUserName}"/>
+        <label for="message-type" class="src-only" th:text="#{wechat.message-header.message-type}">MessageType</label>
+        <select name="messageType" id="message-type" class="form-control mb-2 mr-sm-2">
+            <option value=""></option>
+            <option th:each="messageTypeEnum : ${messageTypes}" th:value="${messageTypeEnum}" value=""
+                    th:text="${messageTypeEnum.displayName}" th:selected="${messageType eq messageTypeEnum}"></option>
+        </select>
+
+        <button type="submit" class="btn btn-sm btn-outline-secondary" th:text="#{search}">Search</button>
+    </form>
+</div>
+
+<h2 layout:fragment="content-subtitle" th:text="#{wechat.message.received}"></h2>
+
+<thead layout:fragment="content-table-head">
+<tr>
+    <th scope="col">#</th>
+    <th scope="col" th:text="#{wechat.message-header.app-id}">AppId</th>
+    <th scope="col" th:text="#{wechat.message-header.user-name}">FromUserName</th>
+    <th scope="col" th:text="#{wechat.message-header.message-type}">MsgType</th>
+    <th scope="col" th:text="#{wechat.message-header.create-time}">CreateTime</th>
+</tr>
+</thead>
+<tbody layout:fragment="content-table-body">
+<tr th:each="message : ${messages}">
+    <td th:text="${message.id}">id</td>
+    <td th:text="${message.toUserName}">ToUserName</td>
+    <td th:text="${message.fromUserName}">FromUserName</td>
+    <td th:text="${message.messageType}">MessageType</td>
+    <td th:text="${message.createAt}">CreateAt</td>
+</tr>
+</tbody>
+
+
+<nav layout:fragment="content-pagination">
+    <ul class="pagination">
+        <li class="page-item" th:if="${messages.hasPrevious() and not messages.first}">
+            <a th:href="${'/admin/wechat/message/received?page=1'}" class="page-link" th:text="#{pagination.first}">First</a>
+        </li>
+        <li class="page-item" th:if="${messages.hasPrevious() and not messages.first}">
+            <a class="page-link" th:href="${'/admin/wechat/message/received?page=' + (messages.getNumber() - 1)}"
+               th:text="#{pagination.previous}">Previous</a>
+        </li>
+        <li class="page-item active">
+            <a class="page-link" th:href="${'/admin/wechat/message/received?page=' + messages.getNumber()}"
+               th:text="${messages.getNumber()}">2</a>
+        </li>
+        <li class="page-item" th:if="${messages.hasNext()}">
+            <a class="page-link"
+               th:href="${'/admin/wechat/message/received?page=' + (messages.getNumber() + 1)}"
+               th:text="#{pagination.next}">Next</a>
+        </li>
+        <li class="page-item" th:if="${messages.hasNext() and not messages.last}">
+            <a th:href="${'/admin/wechat/message/received?page=' + (messages.getTotalPages() - 1)}" class="page-link"
+               th:text="#{pagination.last}">Last</a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

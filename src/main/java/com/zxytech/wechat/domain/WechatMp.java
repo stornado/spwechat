@@ -27,15 +27,20 @@ public class WechatMp implements Serializable {
     @Field("aes_key")
     private String encodingAesKey;
 
+    private Long createAt;
+
     public WechatMp() {
+        this.createAt = System.currentTimeMillis();
     }
 
     public WechatMp(String appId, String appSecret) {
+        this();
         this.appId = appId;
         this.appSecret = appSecret;
     }
 
     public WechatMp(String appId, String appSecret, String token, String encodingAesKey) {
+        this();
         this.appId = appId;
         this.appSecret = appSecret;
         this.token = token;
@@ -82,6 +87,14 @@ public class WechatMp implements Serializable {
         this.encodingAesKey = encodingAesKey;
     }
 
+    public Long getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Long createAt) {
+        this.createAt = createAt;
+    }
+
     @Override
     public String toString() {
         return "WechatMp{" +
@@ -90,6 +103,7 @@ public class WechatMp implements Serializable {
                 ", appSecret='" + appSecret + '\'' +
                 ", token='" + token + '\'' +
                 ", encodingAesKey='" + encodingAesKey + '\'' +
+                ", createAt=" + createAt +
                 '}';
     }
 
