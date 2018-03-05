@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
  * @author xwxia
  * @date 2018/2/26 14:53
  */
-public interface MessageQuery<T extends MessageBase> {
+public interface MessageQuery<T extends BaseMessage> {
     Page<T> findByToUserName(String toUserName, Pageable pageable);
 
     Page<T> findByFromUserName(String fromUserName, Pageable pageable);

@@ -171,7 +171,7 @@ public class WXBizMsgCrypt {
     public WXBizMsgCrypt(String token, String encodingAesKey, String appId) throws AesException {
         logger.debug("token = [" + token + "], encodingAesKey = [" + encodingAesKey + "], appId = [" + appId + "]");
         if (encodingAesKey.length() != 43) {
-            throw new AesException(AesException.IllegalAesKey);
+            throw new AesException(AesException.ILLEGAL_AES_KEY);
         }
 
         this.token = token;
@@ -253,7 +253,7 @@ public class WXBizMsgCrypt {
             return base64.encodeToString(encrypted);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new AesException(AesException.EncryptAESError);
+            throw new AesException(AesException.ENCRYPT_AES_ERROR);
         }
     }
 
@@ -281,7 +281,7 @@ public class WXBizMsgCrypt {
             original = cipher.doFinal(encrypted);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new AesException(AesException.DecryptAESError);
+            throw new AesException(AesException.DECRYPT_AES_ERROR);
         }
 
         String xmlContent, fromAppid;
@@ -299,12 +299,12 @@ public class WXBizMsgCrypt {
                     CHARSET);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new AesException(AesException.IllegalBuffer);
+            throw new AesException(AesException.ILLEGAL_BUFFER);
         }
 
         // appid不相同的情况
         if (!fromAppid.equals(appId)) {
-            throw new AesException(AesException.ValidateAppidError);
+            throw new AesException(AesException.VALIDATE_APPID_ERROR);
         }
         return xmlContent;
 
@@ -368,7 +368,7 @@ public class WXBizMsgCrypt {
 
         // 和URL中的签名比较是否相等
         if (!signature.equals(msgSignature)) {
-            throw new AesException(AesException.ValidateSignatureError);
+            throw new AesException(AesException.VALIDATE_SIGNATURE_ERROR);
         }
 
         // 解密
@@ -392,7 +392,7 @@ public class WXBizMsgCrypt {
 
         if (!signature.equals(msgSignature)) {
             logger.error("signature = " + signature + ", msgSignature = " + msgSignature);
-            throw new AesException(AesException.ValidateSignatureError);
+            throw new AesException(AesException.VALIDATE_SIGNATURE_ERROR);
         }
 
         return decrypt(echoStr);

@@ -19,7 +19,7 @@ import java.util.TreeSet;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "xml")
 @Document(collection = "reply_message")
-public class ReplyMessage extends MessageBase {
+public class ReplyMessage extends BaseMessage {
 
     /**
      * 现支持回复文本、图片、图文、语音、视频、音乐

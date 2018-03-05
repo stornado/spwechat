@@ -13,7 +13,7 @@ import java.util.TreeSet;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Document(collection = "recv_message")
-public class ReceivedMessage extends MessageBase {
+public class ReceivedMessage extends BaseMessage {
 
     /**
      * 允许接收普通消息和事件推送

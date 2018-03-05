@@ -103,7 +103,7 @@ public class WXBizMsgCryptTest {
         try {
             new WXBizMsgCrypt(token, "abcde", appId);
         } catch (AesException e) {
-            assertEquals(AesException.IllegalAesKey, e.getCode());
+            assertEquals(AesException.ILLEGAL_AES_KEY, e.getCode());
             return;
         }
         fail("错误流程不抛出异常？？？");
@@ -128,7 +128,7 @@ public class WXBizMsgCryptTest {
             String fromXML = String.format(xmlFormat, encrypt);
             pc.decryptMsg("12345", timestamp, nonce, fromXML); // 这里签名错误
         } catch (AesException e) {
-            assertEquals(AesException.ValidateSignatureError, e.getCode());
+            assertEquals(AesException.VALIDATE_SIGNATURE_ERROR, e.getCode());
             return;
         }
         fail("错误流程不抛出异常？？？");

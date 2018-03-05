@@ -10,7 +10,7 @@ import static com.zxytech.wechat.utils.StringUtil.isBlank;
  * @author xwxia
  * @date 2018/3/5 14:05
  */
-final public class MessageQueryBuilder<T extends MessageBase> {
+final public class MessageQueryBuilder<T extends BaseMessage> {
     private MessageQuery<T> query;
     private MongoRepository<T, String> repository;
 

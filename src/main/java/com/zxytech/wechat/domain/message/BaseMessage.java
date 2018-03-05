@@ -18,7 +18,7 @@ import java.io.Serializable;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlAccessorType(XmlAccessType.FIELD)
-public abstract class MessageBase implements Serializable {
+public abstract class BaseMessage implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @JsonIgnore
@@ -48,18 +48,18 @@ public abstract class MessageBase implements Serializable {
     @XmlTransient
     protected Long createAt;
 
-    public MessageBase() {
+    public BaseMessage() {
         this.createAt = System.currentTimeMillis();
     }
 
-    public MessageBase(String toUserName, String fromUserName, Long createTime) {
+    public BaseMessage(String toUserName, String fromUserName, Long createTime) {
         this();
         this.toUserName = toUserName;
         this.fromUserName = fromUserName;
         this.createTime = createTime;
     }
 
-    public MessageBase(String toUserName, String fromUserName, Long createTime, MessageTypeEnum messageType) {
+    public BaseMessage(String toUserName, String fromUserName, Long createTime, MessageTypeEnum messageType) {
         this();
         this.toUserName = toUserName;
         this.fromUserName = fromUserName;
