@@ -1,5 +1,6 @@
 package com.zxytech.wechat.domain.message;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -10,6 +11,7 @@ import java.util.TreeSet;
  * @author xwxia
  * @date 2018/2/26 10:45
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Document(collection = "recv_message")
 public class ReceivedMessage extends MessageBase {
 

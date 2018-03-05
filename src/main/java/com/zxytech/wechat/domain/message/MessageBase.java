@@ -1,5 +1,7 @@
 package com.zxytech.wechat.domain.message;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -14,10 +16,12 @@ import java.io.Serializable;
  * @author xwxia
  * @date 2018/2/26 10:19
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class MessageBase implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @JsonIgnore
     @XmlTransient
     @Id
     protected String id;

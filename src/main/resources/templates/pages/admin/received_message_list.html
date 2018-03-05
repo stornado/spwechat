@@ -35,25 +35,29 @@
 
 <h2 layout:fragment="content-subtitle" th:text="#{wechat.message.received}"></h2>
 
-<thead layout:fragment="content-table-head">
-<tr>
-    <th scope="col">#</th>
-    <th scope="col" th:text="#{wechat.message-header.app-id}">AppId</th>
-    <th scope="col" th:text="#{wechat.message-header.user-name}">FromUserName</th>
-    <th scope="col" th:text="#{wechat.message-header.message-type}">MsgType</th>
-    <th scope="col" th:text="#{wechat.message-header.create-time}">CreateTime</th>
-</tr>
-</thead>
-<tbody layout:fragment="content-table-body">
-<tr th:each="message : ${messages}">
-    <td th:text="${message.id}">id</td>
-    <td th:text="${message.toUserName}">ToUserName</td>
-    <td th:text="${message.fromUserName}">FromUserName</td>
-    <td th:text="${message.messageType}">MessageType</td>
-    <td th:text="${message.createAt}">CreateAt</td>
-</tr>
-</tbody>
-
+<table layout:fragment="content-table">
+    <thead layout:fragment="content-table-head">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col" th:text="#{wechat.message-header.app-id}">AppId</th>
+        <th scope="col" th:text="#{wechat.message-header.user-name}">FromUserName</th>
+        <th scope="col" th:text="#{wechat.message-header.message-type}">MsgType</th>
+        <th scope="col" th:text="#{wechat.message-header.create-time}">CreateTime</th>
+    </tr>
+    </thead>
+    <tbody layout:fragment="content-table-body">
+    <tr th:each="message : ${messages}">
+        <td scope="row">
+            <a th:href="${'/admin/wechat/message/received/' + message.id}"
+               th:text="${message.id}">id</a>
+        </td>
+        <td th:text="${message.toUserName}">ToUserName</td>
+        <td th:text="${message.fromUserName}">FromUserName</td>
+        <td th:text="${message.messageType}">MessageType</td>
+        <td th:text="${message.createAt}">CreateAt</td>
+    </tr>
+    </tbody>
+</table>
 
 <nav layout:fragment="content-pagination">
     <ul class="pagination">

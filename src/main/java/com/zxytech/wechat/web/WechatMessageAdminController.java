@@ -10,11 +10,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author xwxia
@@ -37,12 +36,12 @@ public class WechatMessageAdminController {
     }
 
     @GetMapping("/received")
-    public String receivedMessagePages(@RequestParam(value = "appId", required = false) String appId,
-                                       @RequestParam(value = "fromUserName", required = false) String fromUserName,
-                                       @RequestParam(value = "messageType", required = false) MessageTypeEnum messageTypeEnum,
-                                       @RequestParam(value = "page", required = false) Integer page,
-                                       @RequestParam(value = "limit", required = false) Integer limit,
-                                       Model model) {
+    public String receivedMessagePage(@RequestParam(value = "appId", required = false) String appId,
+                                      @RequestParam(value = "fromUserName", required = false) String fromUserName,
+                                      @RequestParam(value = "messageType", required = false) MessageTypeEnum messageTypeEnum,
+                                      @RequestParam(value = "page", required = false) Integer page,
+                                      @RequestParam(value = "limit", required = false) Integer limit,
+                                      Model model) {
         logger.debug("appId = [" + appId
                 + "], fromUserName = [" + fromUserName
                 + "], messageTypeEnum = [" + messageTypeEnum
@@ -71,14 +70,19 @@ public class WechatMessageAdminController {
         return "pages/admin/received_message_list";
     }
 
+    @GetMapping(value = "/received/{messageId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ReceivedMessage receivedMessage(@PathVariable("messageId") String messageId) {
+        return receivedMessageRepository.findOne(messageId);
+    }
 
     @GetMapping("/reply")
-    public String replyMessagePages(@RequestParam(value = "appId", required = false) String appId,
-                                    @RequestParam(value = "toUserName", required = false) String toUserName,
-                                    @RequestParam(value = "messageType", required = false) MessageTypeEnum messageTypeEnum,
-                                    @RequestParam(value = "page", required = false) Integer page,
-                                    @RequestParam(value = "limit", required = false) Integer limit,
-                                    Model model) {
+    public String replyMessagePage(@RequestParam(value = "appId", required = false) String appId,
+                                   @RequestParam(value = "toUserName", required = false) String toUserName,
+                                   @RequestParam(value = "messageType", required = false) MessageTypeEnum messageTypeEnum,
+                                   @RequestParam(value = "page", required = false) Integer page,
+                                   @RequestParam(value = "limit", required = false) Integer limit,
+                                   Model model) {
         logger.debug("appId = [" + appId
                 + "], toUserName = [" + toUserName
                 + "], messageTypeEnum = [" + messageTypeEnum
@@ -104,5 +108,11 @@ public class WechatMessageAdminController {
         model.addAttribute("appId", appId);
         model.addAttribute("messageType", messageTypeEnum);
         return "pages/admin/reply_message_list";
+    }
+
+    @GetMapping(value = "/reply/{messageId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ReplyMessage replyMessage(@PathVariable("messageId") String messageId) {
+        return replyMessageRepository.findOne(messageId);
     }
 }

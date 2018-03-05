@@ -23,6 +23,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'application'
+apply plugin: 'maven'
 apply plugin: "io.spring.dependency-management"
 apply plugin: 'org.springframework.boot'
 
@@ -69,6 +70,20 @@ dependencies {
     compile group: 'org.webjars.npm', name: 'popper.js', version: '1.13.0'
     // https://mvnrepository.com/artifact/org.webjars.npm/chart.js
     compile group: 'org.webjars.npm', name: 'chart.js', version: '2.7.1'
+
+    // https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2
+    compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.2.1.RELEASE'
+    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-jwt
+    compile group: 'org.springframework.security', name: 'spring-security-jwt', version: '1.0.9.RELEASE'
+
+    // https://mvnrepository.com/artifact/org.springframework.social/spring-social-config
+    compile group: 'org.springframework.social', name: 'spring-social-config', version: '1.1.5.RELEASE'
+    // https://mvnrepository.com/artifact/org.springframework.social/spring-social-security
+    compile group: 'org.springframework.social', name: 'spring-social-security', version: '1.1.5.RELEASE'
+
+    // https://mvnrepository.com/artifact/org.springframework.social/spring-social-github
+    compile group: 'org.springframework.social', name: 'spring-social-github', version: '1.0.0.M4'
+
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.10.RELEASE'

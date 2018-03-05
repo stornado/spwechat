@@ -1,5 +1,6 @@
 package com.zxytech.wechat.domain.message;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.xml.bind.annotation.*;
@@ -10,6 +11,7 @@ import java.io.Serializable;
  * @author xwxia
  * @date 2018/2/26 11:27
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "item")
 public class NewsArticle implements Serializable {
