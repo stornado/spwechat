@@ -62,23 +62,23 @@
 <nav layout:fragment="content-pagination">
     <ul class="pagination">
         <li class="page-item" th:if="${messages.hasPrevious() and not messages.first}">
-            <a th:href="${'/admin/wechat/message/received?page=1'}" class="page-link" th:text="#{pagination.first}">First</a>
+            <a th:href="${'/admin/wechat/message/reply?page=1'}" class="page-link" th:text="#{pagination.first}">First</a>
         </li>
         <li class="page-item" th:if="${messages.hasPrevious() and not messages.first}">
-            <a class="page-link" th:href="${'/admin/wechat/message/received?page=' + (messages.getNumber() - 1)}"
+            <a class="page-link" th:href="${'/admin/wechat/message/reply?page=' + (messages.getNumber() - 1)}"
                th:text="#{pagination.previous}">Previous</a>
         </li>
         <li class="page-item active">
-            <a class="page-link" th:href="${'/admin/wechat/message/received?page=' + messages.getNumber()}"
+            <a class="page-link" th:href="${'/admin/wechat/message/reply?page=' + messages.getNumber()}"
                th:text="${messages.getNumber()}">2</a>
         </li>
         <li class="page-item" th:if="${messages.hasNext()}">
             <a class="page-link"
-               th:href="${'/admin/wechat/message/received?page=' + (messages.getNumber() + 1)}"
+               th:href="${'/admin/wechat/message/reply?page=' + (messages.getNumber() + 1)}"
                th:text="#{pagination.next}">Next</a>
         </li>
         <li class="page-item" th:if="${messages.hasNext() and not messages.last}">
-            <a th:href="${'/admin/wechat/message/received?page=' + (messages.getTotalPages() - 1)}" class="page-link"
+            <a th:href="${'/admin/wechat/message/reply?page=' + (messages.getTotalPages() - 1)}" class="page-link"
                th:text="#{pagination.last}">Last</a>
         </li>
     </ul>
