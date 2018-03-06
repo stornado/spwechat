@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/dashboard">
+<head>
+    <title th:text="#{authorization.create-user}">Create User</title>
+</head>
+<body>
+<main layout:fragment="main-content" sec:authorize="hasRole('ROLE_ADMIN')">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h2 layout:fragment="main-content-title" th:text="#{authorization.create-user}">Create User</h2>
+    </div>
+    <form th:action="@{/admin/manager/add}" action="/admin/manager/add" method="post">
+        <div class="form-group row">
+            <label for="manager-name" class="col-sm-2 col-form-label"
+                   th:text="#{authorization.manager.name}">Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="manager-name" name="name" required="required"
+                       placeholder="请输入用户姓名..."/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="manager-phone" class="col-sm-2 col-form-label"
+                   th:text="#{authorization.manager.phone}">Phone</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="manager-phone" name="phone" placeholder="请输入用户手机号..."/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="manager-email" class="col-sm-2 col-form-label"
+                   th:text="#{authorization.manager.email}">Email</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="manager-email" name="email" placeholder="请输入用户邮箱..."/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="manager-username" class="col-sm-2 col-form-label" th:text="#{authorization.manager.username}">Username</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="manager-username" name="username" required="required"
+                       placeholder="请输入用户名..."/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="manager-password" class="col-sm-2 col-form-label" th:text="#{authorization.manager.password}">Password</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="manager-password" name="password" required="required"
+                       placeholder="请输入用户密码..."/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="manager-role" class="col-sm-2 col-form-label"
+                   th:text="#{authorization.manager.role}">Role</label>
+            <div class="col-sm-10">
+                <select name="role" id="manager-role">
+                    <option th:each="roleEnum : ${roles}" th:text="${roleEnum.title}" th:value="${roleEnum}">
+                        请先添加用户...
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-secondary btn-lg" onclick="javascript:window.history.back()"
+                    th:text="#{cancel}">Cancel
+            </button>
+            <button type="submit" class="btn btn-primary btn-lg" th:text="#{submit}">Submit</button>
+        </div>
+    </form>
+</main>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.zxytech.wechat.web;
 
+import com.zxytech.wechat.config.SecurityConfig;
 import com.zxytech.wechat.domain.WechatMpRepository;
 import com.zxytech.wechat.domain.message.*;
 import com.zxytech.wechat.utils.PagePredicateUtil;
@@ -15,12 +16,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
+
 /**
  * @author xwxia
  * @date 2018/3/1 19:06
  */
 @Controller
 @RequestMapping("/admin/wechat/message")
+@RolesAllowed({SecurityConfig.ROLE_USER, SecurityConfig.ROLE_ADMIN})
 public class WechatMessageAdminController {
     private static final Logger logger = LoggerFactory.getLogger(WechatMessageAdminController.class);
 

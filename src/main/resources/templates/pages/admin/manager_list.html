@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/dashboard">
+<head>
+    <title th:text="#{authorization.management}">Authorization management</title>
+</head>
+<body>
+
+<h1 layout:fragment="content-title" th:text="#{authorization.management}"></h1>
+
+<div layout:fragment="content-action">
+    <form action="#" class="form-inline">
+        <label for="username" class="src-only"
+               th:text="#{wechat.message-header.user-name}">UserName</label>
+        <input name="username" id="username" type="text" class="form-control mb-2 mr-sm-2"
+               th:placeholder="#{wechat.message-header.user-name}" th:value="${username}"/>
+        <label for="role" class="src-only" th:text="#{wechat.message-header.message-type}">Role</label>
+        <select name="role" id="role" class="form-control mb-2 mr-sm-2">
+            <option value=""></option>
+            <option th:each="roleEnum : ${roles}" th:value="${roleEnum}" value=""
+                    th:text="${roleEnum.title}" th:selected="${role eq roleEnum}"></option>
+        </select>
+
+        <button type="submit" class="btn btn-sm btn-outline-secondary" th:text="#{search}">Search</button>
+    </form>
+    <a th:href="@{/admin/manager/add}" href="/admin/manager/add" class="btn btn-dark btn-sm"
+       sec:authorize="hasRole('ROLE_ADMIN')" th:text="#{create}">Create</a>
+</div>
+
+<h2 layout:fragment="content-subtitle" th:text="#{authorization.user}"></h2>
+
+<table layout:fragment="content-table">
+    <thead layout:fragment="content-table-head">
+    <tr>
+        <th scope="col"># <b sec:authentication="name"></b></th>
+        <th scope="col" th:text="#{authorization.manager.username}">Username</th>
+        <th scope="col" th:text="#{authorization.manager.name}">Name</th>
+        <th scope="col" th:text="#{authorization.manager.role}">Role</th>
+        <th scope="col" th:text="#{authorization.manager.lastLoginAt}">LastLoginAt</th>
+        <th scope="col" th:text="#{authorization.manager.active}">Active</th>
+        <th scope="col" th:text="#{operation}">操作</th>
+    </tr>
+    </thead>
+    <tbody layout:fragment="content-table-body">
+    <tr th:each="manager : ${managers}">
+        <td scope="row">
+            <a th:href="${'/admin/manager/' + manager.id}"
+               th:text="${manager.id}">id</a>
+        </td>
+        <td th:text="${manager.username}">Username</td>
+        <td th:text="${manager.name}">Name</td>
+        <td th:text="${manager.role.title}">Role</td>
+        <td th:text="${#dates.format(manager.lastLoginAt, 'yyyy-MM-dd HH:mm:ss')}" th:unless="${manager.lastLoginAt eq null}">LastLoginAt</td>
+        <td th:text="${manager.active}">Active</td>
+        <td><a th:href="${'/admin/manager/del/' + manager.id}" class="text-danger" th:text="#{delete}"></a></td>
+    </tr>
+    </tbody>
+</table>
+
+<nav layout:fragment="content-pagination">
+    <ul class="pagination">
+        <li class="page-item" th:if="${managers.hasPrevious() and not managers.first}">
+            <a th:href="${'/admin/wechat/message/received?page=1'}" class="page-link" th:text="#{pagination.first}">First</a>
+        </li>
+        <li class="page-item" th:if="${managers.hasPrevious() and not managers.first}">
+            <a class="page-link" th:href="${'/admin/wechat/message/received?page=' + (managers.getNumber() - 1)}"
+               th:text="#{pagination.previous}">Previous</a>
+        </li>
+        <li class="page-item active">
+            <a class="page-link" th:href="${'/admin/wechat/message/received?page=' + managers.getNumber()}"
+               th:text="${managers.getNumber()}">2</a>
+        </li>
+        <li class="page-item" th:if="${managers.hasNext()}">
+            <a class="page-link"
+               th:href="${'/admin/wechat/message/received?page=' + (managers.getNumber() + 1)}"
+               th:text="#{pagination.next}">Next</a>
+        </li>
+        <li class="page-item" th:if="${managers.hasNext() and not managers.last}">
+            <a th:href="${'/admin/wechat/message/received?page=' + (managers.getTotalPages() - 1)}" class="page-link"
+               th:text="#{pagination.last}">Last</a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

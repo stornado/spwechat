@@ -1,5 +1,6 @@
 package com.zxytech.wechat.web;
 
+import com.zxytech.wechat.config.SecurityConfig;
 import com.zxytech.wechat.domain.WechatMp;
 import com.zxytech.wechat.domain.WechatMpRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.annotation.security.RolesAllowed;
+
 /**
  * @author xwxia
  * @date 2018/2/26 15:29
  */
 @Controller
 @RequestMapping("/admin/wechat")
+@RolesAllowed({SecurityConfig.ROLE_USER, SecurityConfig.ROLE_ADMIN})
 public class WechatAdminController {
     private WechatMpRepository wechatMpRepository;
 
@@ -24,13 +28,13 @@ public class WechatAdminController {
         this.wechatMpRepository = wechatMpRepository;
     }
 
-    @GetMapping("")
+    @GetMapping({"", "/"})
     public String wechatAdminPage(Model model) {
         model.addAttribute("wechats", wechatMpRepository.findAll());
         return "pages/admin/wechat_list";
     }
 
-    @PostMapping("/")
+    @PostMapping({"", "/"})
     public String addWechat(@RequestParam("appid") String appId,
                             @RequestParam("appsecret") String appSecret,
                             @RequestParam("encodingaeskey") String encodingAesKey,

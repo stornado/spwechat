@@ -4,6 +4,7 @@ import com.qq.weixin.mp.aes.AesException;
 import com.qq.weixin.mp.aes.SHA1;
 import com.qq.weixin.mp.aes.WXBizMsgCrypt;
 import com.sun.xml.internal.bind.marshaller.CharacterEscapeHandler;
+import com.zxytech.wechat.config.SecurityConfig;
 import com.zxytech.wechat.domain.WechatMp;
 import com.zxytech.wechat.domain.WechatMpService;
 import com.zxytech.wechat.domain.message.*;
@@ -16,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.xml.sax.SAXException;
 
+import javax.annotation.security.RolesAllowed;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -30,6 +32,7 @@ import java.util.List;
  * @date 2018/2/26 15:21
  */
 @RestController
+@RolesAllowed({SecurityConfig.ROLE_USER, SecurityConfig.ROLE_ADMIN})
 public class WechatEchoController {
     private static final Logger logger = LoggerFactory.getLogger(WechatEchoController.class);
 
