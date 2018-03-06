@@ -62,8 +62,8 @@ dependencies {
     // https://mvnrepository.com/artifact/com.github.mxab.thymeleaf.extras/thymeleaf-extras-data-attribute
     compile group: 'com.github.mxab.thymeleaf.extras', name: 'thymeleaf-extras-data-attribute', version: '2.0.1'
     // https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4
-    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '3.0.2.RELEASE'
-
+    // 需要使用2.1.3版本，使用3.0.2版本时 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" 无法解析
+    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4'//, version: '3.0.2.RELEASE'
 
     // https://mvnrepository.com/artifact/commons-codec/commons-codec
     compile group: 'commons-codec', name: 'commons-codec', version: '1.11'
@@ -89,7 +89,6 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.springframework.social/spring-social-github
     compile group: 'org.springframework.social', name: 'spring-social-github', version: '1.0.0.M4'
-
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.10.RELEASE'

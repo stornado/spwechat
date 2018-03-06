@@ -26,9 +26,11 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-        <span class="navbar-text ml-auto" th:if="${#locale.getCountry().equals('CN')}">欢迎 <b sec:authentication="name"></b>
+        <span class="navbar-text ml-auto" th:if="${#locale.getCountry().equals('CN')}">
+            欢迎 <b sec:authentication="name"></b>
         </span>
-        <span class="navbar-text ml-auto" th:unless="${#locale.getCountry().equals('CN')}">Welcome <b sec:authentication="name"></b>
+        <span class="navbar-text ml-auto" th:unless="${#locale.getCountry().equals('CN')}">
+            Welcome <b sec:authentication="name"></b>
         </span>
         <form th:action="@{/logout}" action="/logout" method="post" class="form-inline mt-2 mt-md-0"
               sec:authorize="isAuthenticated()">
