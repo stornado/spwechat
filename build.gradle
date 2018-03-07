@@ -45,53 +45,53 @@ targetCompatibility = 1.8
 
 dependencies {
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.10.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'//, version: '1.5.10.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '1.5.10.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'//, version: '1.5.10.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
-    compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '1.5.10.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-devtools'//, version: '1.5.10.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '1.5.10.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security'//, version: '1.5.10.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '1.5.10.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'//, version: '1.5.10.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version: '1.5.10.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb'//, version: '1.5.10.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '1.5.10.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis'//, version: '1.5.10.RELEASE'
 
     // https://mvnrepository.com/artifact/com.github.mxab.thymeleaf.extras/thymeleaf-extras-data-attribute
-    compile group: 'com.github.mxab.thymeleaf.extras', name: 'thymeleaf-extras-data-attribute', version: '2.0.1'
+    compile group: 'com.github.mxab.thymeleaf.extras', name: 'thymeleaf-extras-data-attribute'//, version: '2.0.1'
     // https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4
     // 需要使用2.1.3版本，使用3.0.2版本时 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" 无法解析
     compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4'//, version: '3.0.2.RELEASE'
 
     // https://mvnrepository.com/artifact/commons-codec/commons-codec
-    compile group: 'commons-codec', name: 'commons-codec', version: '1.11'
+    compile group: 'commons-codec', name: 'commons-codec'//, version: '1.11'
 
     // https://mvnrepository.com/artifact/org.webjars/bootstrap
     compile group: 'org.webjars', name: 'bootstrap', version: '4.0.0'
-    // https://mvnrepository.com/artifact/org.webjars/jquery
-    compile group: 'org.webjars', name: 'jquery', version: '3.3.1'
-    // https://mvnrepository.com/artifact/org.webjars.npm/popper.js
-    compile group: 'org.webjars.npm', name: 'popper.js', version: '1.13.0'
+//    // https://mvnrepository.com/artifact/org.webjars/jquery
+//    compile group: 'org.webjars', name: 'jquery'//, version: '3.3.1'
+//    // https://mvnrepository.com/artifact/org.webjars.npm/popper.js
+//    compile group: 'org.webjars.npm', name: 'popper.js'//, version: '1.13.0'
     // https://mvnrepository.com/artifact/org.webjars.npm/chart.js
     compile group: 'org.webjars.npm', name: 'chart.js', version: '2.7.1'
 
     // https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2
-    compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.2.1.RELEASE'
+    compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2'//, version: '2.2.1.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.security/spring-security-jwt
-    compile group: 'org.springframework.security', name: 'spring-security-jwt', version: '1.0.9.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-jwt'//, version: '1.0.9.RELEASE'
 
     // https://mvnrepository.com/artifact/org.springframework.social/spring-social-config
-    compile group: 'org.springframework.social', name: 'spring-social-config', version: '1.1.5.RELEASE'
+    compile group: 'org.springframework.social', name: 'spring-social-config'//, version: '1.1.5.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.social/spring-social-security
-    compile group: 'org.springframework.social', name: 'spring-social-security', version: '1.1.5.RELEASE'
+    compile group: 'org.springframework.social', name: 'spring-social-security'//, version: '1.1.5.RELEASE'
 
     // https://mvnrepository.com/artifact/org.springframework.social/spring-social-github
     compile group: 'org.springframework.social', name: 'spring-social-github', version: '1.0.0.M4'
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
-    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.10.RELEASE'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'//, version: '1.5.10.RELEASE'
     // https://mvnrepository.com/artifact/junit/junit
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'junit', name: 'junit'//, version: '4.12'
 }

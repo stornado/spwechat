@@ -106,12 +106,12 @@ public class ManagerAdminController {
                            @RequestParam(value = "email", required = false) String email,
                            @RequestParam(value = "username") @NotNull String username,
                            @RequestParam(value = "password", required = false) @NotNull String password,
-                           @RequestParam(value = "role") UserRoleEnum role,
+                           @RequestParam(value = "role", required = false) UserRoleEnum role,
                            @RequestParam("active") @NotNull boolean active,
                            Authentication authentication) {
         Manager manager = managerRepository.findOne(staffId);
 
-        /**
+        /*
          * 当前用户可以修改自己，管理员可以修改全部
          */
         boolean isAdmin = authentication.getAuthorities().contains(new SimpleGrantedAuthority(UserRoleEnum.ADMIN.getRole()));
