@@ -75,7 +75,8 @@ public class ManagerAdminController {
     }
 
     @PostMapping("/add")
-    public String addUser(@RequestParam("name") String name, @RequestParam("username") String username,
+    public String addUser(@RequestParam("name") String name,
+                          @RequestParam("username") String username,
                           @RequestParam(value = "phone", required = false) String phone,
                           @RequestParam(value = "email", required = false) String email,
                           @RequestParam("password") String password,
@@ -100,12 +101,12 @@ public class ManagerAdminController {
     }
 
     @PostMapping("/{staffId}")
-    public String editUser(@PathVariable("staffId") String staffId,
-                           @RequestParam("name") String name,
-                           @RequestParam(value = "phone", required = false) @NotNull String phone,
+    public String editUser(@PathVariable("staffId") @NotNull String staffId,
+                           @RequestParam("name") @NotNull String name,
+                           @RequestParam(value = "phone", required = false) String phone,
                            @RequestParam(value = "email", required = false) String email,
                            @RequestParam(value = "username") @NotNull String username,
-                           @RequestParam(value = "password", required = false) @NotNull String password,
+                           @RequestParam(value = "password", required = false) String password,
                            @RequestParam(value = "role", required = false) UserRoleEnum role,
                            @RequestParam("active") @NotNull boolean active,
                            Authentication authentication) {
